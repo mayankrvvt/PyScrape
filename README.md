@@ -1,53 +1,48 @@
 # PyScrape
-API Request Monitor
+🚀 API Request Monitor
 
-This script periodically checks an API endpoint for the number of pending requests and logs the results with timestamps.
-It is useful for monitoring background jobs or queues that process requests until completion.
+A lightweight Python script to monitor API request queues in real-time.
+It periodically checks an API endpoint, logs the number of pending requests, and stops automatically when no requests are left.
 
-Features
+✨ Features
 
-Fetches data from a given API every 5 seconds.
+⏱️ Runs every 5 seconds (configurable).
 
-Extracts and prints the pendingRequestCount field.
+📡 Fetches request count from your API.
 
-Logs timestamps for each request.
+📝 Logs results with timestamps.
 
-Stops monitoring automatically when pendingRequestCount becomes 0.
+✅ Automatically stops when pendingRequestCount = 0.
 
-Handles errors gracefully (e.g., network issues, missing fields).
+⚡ Handles API failures and missing fields gracefully.
 
-Requirements
+📂 Project Structure
+.
+├── monitor.py     # Main script
+├── .env           # Environment variables (API_URL)
+└── README.md      # Documentation
 
-Python 3.7+
+🔧 Installation
+1. Clone or copy this project
+git clone https://github.com/yourusername/api-request-monitor.git
+cd api-request-monitor
 
-Packages:
-
-schedule
-
-requests
-
-python-dotenv
-
-Installation
-
-Clone this repository or copy the script.
-
-Install dependencies:
-
+2. Install dependencies
 pip install schedule requests python-dotenv
 
+3. Configure your API URL
 
 Create a .env file in the project root:
 
 API_URL=https://your-api-endpoint.com/status
 
-Usage
+▶️ Usage
 
-Run the script with:
+Run the script:
 
 python monitor.py
 
-Example Output:
+✅ Example Output
 Time : 2025-09-10 23:15:30 
 pendingRequestCount : 12
 
@@ -58,17 +53,21 @@ Time : 2025-09-10 23:15:40
 pendingRequestCount : 0
 Program end at 2025-09-10 23:15:40
 
-Configuration
+⚙️ Configuration
 
-The API URL is read from the .env file (API_URL).
+Change the API URL in .env:
 
-The script runs every 5 seconds by default.
-You can adjust the interval here:
+API_URL=https://new-api-url.com/status
 
-schedule.every(5).seconds.do(job)
 
-Error Handling
+Modify the interval in monitor.py:
 
-If the API call fails, the script logs the error with a timestamp.
+schedule.every(10).seconds.do(job)  # runs every 10 seconds
 
-If pendingRequestCount is missing, it shows Field not found.
+🛡️ Error Handling
+
+If the API call fails → logs an error with timestamp.
+
+If pendingRequestCount is missing → shows Field not found.
+
+If API is unreachable → shows HTTP status code.
